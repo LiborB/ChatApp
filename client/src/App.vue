@@ -22,3 +22,9 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style>
+.hidden {
+    visibility: hidden;
+}
+</style>

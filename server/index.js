@@ -57,15 +57,30 @@ io.on("connection", (socket) => {
     });
 
     socket.on("messageSent", (data) => {
-        const client = clients.find((x) => x.id === socket.id);
-        if (!client) {
-            return;
-        }
-        const roomName = client.room;
+        let roomName = getRoomName(socket);
         io.sockets.in(roomName).emit("messageReceived", data);
+    });
+
+    socket.on("stoppedTyping", (data) => {
+        let roomName = getRoomName(socket);
+        io.sockets.in(roomName).emit("stoppedTyping", data);
+    });
+
+    socket.on("startedTyping", (data) => {
+        let roomName = getRoomName(socket);
+        io.sockets.in(roomName).emit("startedTyping", data);
     });
 
     socket.on("userDisconnect", (data) => {
         searchingClients.filter((x) => x.socket.id !== socket.id);
     });
 });
+
+function getRoomName(socket) {
+    const client = clients.find((x) => x.id === socket.id);
+    if (!client) {
+        return;
+    }
+    const roomName = client.room;
+    return roomName;
+}
