@@ -1,18 +1,17 @@
 <template>
-    <v-app>
+    <a-layout class="layout-container">
         <navbar></navbar>
-
-        <v-content>
+        <a-layout-content class="layout-content">
             <router-view></router-view>
-        </v-content>
-    </v-app>
+        </a-layout-content>
+    </a-layout>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Navbar from "@/components/Navbar.vue";
 import io from "socket.io-client";
-export const socket = io("http://192.168.1.101:3000");
+export const socket = io("http://localhost:3000");
 
 export default Vue.extend({
     name: "App",
@@ -26,5 +25,14 @@ export default Vue.extend({
 <style>
 .hidden {
     visibility: hidden;
+}
+
+.html,
+.body {
+    height: 100%;
+}
+
+.layout-container {
+    height: inherit;
 }
 </style>

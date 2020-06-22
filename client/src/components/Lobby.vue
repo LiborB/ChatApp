@@ -1,89 +1,99 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="3">
-                <router-link to="/">Back</router-link>
-            </v-col>
-            <v-col cols="6">
-                <v-row class="headline"><span>You are talking with
-                        <span class="other-username-title">{{
-                            otherUsername
-                        }}</span>
-                        about
-                        <span class="category-title">{{ category }}
-                        </span></span>
-                </v-row>
-                <v-row class="text-container">
-                    <v-col cols="12">
-                        <v-row class="message-output">
-                            <v-col cols="12">
-                                <v-row
-                                    v-for="(message, index) in messages"
-                                    :key="index"
-                                >
-                                    <v-col
-                                        cols="12"
-                                        class="message-col"
-                                    >
-                                        <span
-                                            v-if="message.isLocal"
-                                            class="message-username local"
-                                        >me:</span>
-                                        <span
-                                            v-else
-                                            class="message-username other"
-                                        >{{ message.username }}:</span>
-                                        &nbsp;
-                                        <span
-                                            class="message-text"
-                                            :class="{
-                                    'local-message':
-                                        message.isLocal,
-                                    'remote-message':
-                                        !message.isLocal
-                                }"
-                                        >{{ message.text }}</span>
-                                    </v-col>
-                                </v-row>
-                            </v-col>
-                        </v-row>
-                        <v-row>
-                            <v-col cols="12">
-                                <span
-                                    class="user-typing"
-                                    :class="{'hidden': !isOtherUserTyping}"
-                                    style="display:block"
-                                >{{otherUsername}} is typing...
-                                </span>
-                            </v-col>
-                        </v-row>
-                        <v-row
-                            align="center"
-                            class="send-message-row"
+    <a-row>
+        <a-col :span="24">
+            <a-row>
+                <a-col>
+                    <a-page-header
+                        style="border: 1px solid rgb(235, 237, 240)"
+                        :title="category"
+                        :sub-title="`with ${otherUsername}`"
+                        @back="goBack()"
+                    ></a-page-header>
+                </a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="6"> </a-col>
+                <a-col :span="12">
+                    <a-row class="info-title"
+                        ><span
+                            >You are talking with
+                            <span class="other-username-title">{{
+                                otherUsername
+                            }}</span>
+                            about
+                            <span class="category-title"
+                                >{{ category }}
+                            </span></span
                         >
+                    </a-row>
+                    <a-row class="text-container">
+                        <a-col :span="24">
+                            <a-row class="message-output">
+                                <a-col :span="24">
+                                    <a-row
+                                        v-for="(message, index) in messages"
+                                        :key="index"
+                                    >
+                                        <a-col :span="24" class="message-col">
+                                            <span
+                                                v-if="message.isLocal"
+                                                class="message-username local"
+                                                >me:</span
+                                            >
+                                            <span
+                                                v-else
+                                                class="message-username other"
+                                                >{{ message.username }}:</span
+                                            >
+                                            &nbsp;
+                                            <span
+                                                class="message-text"
+                                                :class="{
+                                                    'local-message':
+                                                        message.isLocal,
+                                                    'remote-message': !message.isLocal
+                                                }"
+                                                >{{ message.text }}</span
+                                            >
+                                        </a-col>
+                                    </a-row>
+                                </a-col>
+                            </a-row>
+                            <a-row style="padding-top: 10px">
+                                <a-col :span="24">
+                                    <span
+                                        class="user-typing"
+                                        :class="{ hidden: !isOtherUserTyping }"
+                                        style="display:block"
+                                        >{{ otherUsername }} is typing...
+                                    </span>
+                                </a-col>
+                            </a-row>
+                            <a-row align="center" class="send-message-row">
+                                <a-col :span="20">
+                                    <a-input
+                                        placeholder="Send a message"
+                                        v-model="currentMessageInput"
+                                        @keydown="handleKeyDown"
+                                        @keyup="handleKeyUp"
+                                    ></a-input>
+                                </a-col>
+                                <a-col :span="4">
+                                    <a-button
+                                        type="primary"
+                                        @click="sendMessage"
+                                        >Send</a-button
+                                    >
+                                </a-col>
+                            </a-row>
+                        </a-col>
+                    </a-row>
+                </a-col>
 
-                            <v-col cols="10">
-                                <v-text-field
-                                    placeholder="Send a message"
-                                    v-model="currentMessageInput"
-                                    @keydown="handleKeyDown"
-                                    @keyup="handleKeyUp"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="2">
-                                <v-btn
-                                    color="primary"
-                                    @click="sendMessage"
-                                >Send</v-btn>
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                </v-row>
-            </v-col>
-        </v-row>
-        <v-col cols="3">
-        </v-col>
-    </v-container>
+                <a-col :span="6"> </a-col>
+            </a-row>
+        </a-col>
+    </a-row>
 </template>
 
 <script lang="ts">
@@ -177,6 +187,10 @@ export default Vue.extend({
 
         isLocalMessage(message: Message) {
             return message.username === Statics.Username;
+        },
+
+        goBack() {
+            this.$router.back();
         }
     },
     beforeMount() {
@@ -195,6 +209,7 @@ export default Vue.extend({
 .text-container {
     border: 1px solid black;
     height: 600px;
+    background: white;
 }
 .other-username-title {
     font-weight: bold;
@@ -220,11 +235,11 @@ export default Vue.extend({
     color: grey;
 }
 
-.message-output > .col > .row {
+.message-output > .ant-col > .ant-row {
     max-height: 100%;
 }
 
-.text-container > .col > .message-output {
+.text-container > .ant-col > .message-output {
     height: 523px;
     overflow: auto;
 }
@@ -237,6 +252,7 @@ export default Vue.extend({
     font-size: 12px;
     font-style: italic;
     margin-top: -10px;
+    margin-left: 5px;
 }
 
 .message-text {
@@ -246,5 +262,12 @@ export default Vue.extend({
 .message-col {
     padding-top: 0px;
     padding-bottom: 0px;
+    padding-left: 5px;
+}
+
+.info-title {
+    font-size: 24px;
+
+    text-align: center;
 }
 </style>

@@ -1,46 +1,45 @@
 <template>
-    <v-container>
-        <v-row>
-            <v-col cols="4"></v-col>
-            <v-col cols="4">
-                <div class="headline">
-                    Choose a category and find your match!
-                </div>
-            </v-col>
-            <v-col cols="4"></v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="4"></v-col>
-            <v-col cols="4">
-                <v-row align="center">
-                    <v-col cols="9">
-                        <v-text-field
-                            :loading="isSearching ? true : false"
-                            v-model="category"
-                        ></v-text-field>
-                    </v-col>
-                    <v-col cols="3">
-                        <v-btn
-                            @click="beginSearching"
-                            color="primary"
-                        >Search</v-btn>
-                    </v-col>
-                </v-row>
-
-            </v-col>
-            <v-col cols="4"></v-col>
-        </v-row>
-        <v-row>
-            <v-col cols="4"></v-col>
-            <v-col cols="4">
-                <v-text-field
-                    v-model="displayName"
-                    placeholder="(Optional) Specify a display name"
-                ></v-text-field>
-            </v-col>
-            <v-col cols="4"></v-col>
-        </v-row>
-    </v-container>
+    <a-row>
+        <a-col :span="24">
+            <a-row>
+                <a-col :span="8"></a-col>
+                <a-col :span="8">
+                    <div class="choose-topic-header">
+                        Choose a topic!
+                    </div>
+                </a-col>
+                <a-col :span="8"></a-col>
+            </a-row>
+            <a-row>
+                <a-col :span="8"></a-col>
+                <a-col :span="8">
+                    <a-row class="search-row">
+                        <a-col :span="24">
+                            <a-input-search
+                                size="large"
+                                @search="beginSearching"
+                                enter-button
+                                :loading="isSearching ? true : false"
+                                v-model="category"
+                                placeholder="Find Category"
+                            ></a-input-search>
+                        </a-col>
+                    </a-row>
+                    <a-row class="username-row">
+                        <a-col :span="12">
+                            <a-input
+                                v-model="displayName"
+                                placeholder="(Optional) Specify a display name"
+                                ><a-icon slot="prefix" type="user"
+                            /></a-input>
+                        </a-col>
+                        <a-col :span="6"></a-col>
+                    </a-row>
+                </a-col>
+                <a-col :span="8"></a-col>
+            </a-row>
+        </a-col>
+    </a-row>
 </template>
 
 <script lang="ts">
@@ -90,3 +89,17 @@ export default Vue.extend({
     }
 });
 </script>
+
+<style scoped>
+.search-row {
+    margin-top: 10px;
+}
+
+.username-row {
+    margin-top: 20px;
+}
+
+.choose-topic-header {
+    font-size: 24px;
+}
+</style>

@@ -2,9 +2,10 @@ import Vue from "vue";
 import App from "./App.vue";
 import Lobby from "@/components/Lobby.vue";
 import SearchPage from "@/components/SearchPage.vue";
-import vuetify from "./plugins/vuetify";
 import VueRouter from "vue-router";
 import Statics from "./shared/statics";
+import 'ant-design-vue/dist/antd.css';
+import Antd from "ant-design-vue"
 const routes = [
     { path: "/", component: SearchPage },
     { path: "/lobby", component: Lobby, props: true, name: "lobby" },
@@ -23,11 +24,11 @@ const router = new VueRouter({
 });
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+Vue.use(Antd);
 
 Statics.Username = generateRandomUsername();
 
 new Vue({
-    vuetify,
     router,
     render: (h) => h(App),
 }).$mount("#app");
