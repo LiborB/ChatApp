@@ -32,7 +32,23 @@ function getTenPopularTopics() {
 	return topTen;
 }
 
+function getMatchingTopics(searchValue) {
+	const matchingTopics = getDb()
+		.collection(collections.MatchFoundStatistics)
+		.find({
+			topicName: {
+				$regex: ".*" + searchValue.toLowerCase() + ".*",
+			},
+		})
+		.sort({
+			count: -1,
+		})
+		.toArray();
+	return matchingTopics;
+}
+
 module.exports = {
 	insertTopicMatch: insertTopicMatch,
 	getTenPopularTopics: getTenPopularTopics,
+	getMatchingTopics: getMatchingTopics,
 };

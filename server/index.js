@@ -3,6 +3,7 @@ const { setupDatabase } = require("./services/database");
 const {
 	insertTopicMatch,
 	getTenPopularTopics,
+	getMatchingTopics,
 } = require("./services/statistic-service");
 var cors = require("cors");
 var app = express();
@@ -18,6 +19,12 @@ app.get("/", (req, res) => {
 
 app.get("/gettoptentopics", (req, res) => {
 	getTenPopularTopics().then((response) => {
+		return res.send(response);
+	});
+});
+
+app.get("/findmatchingtopics", (req, res) => {
+	getMatchingTopics(req.query.searchValue).then((response) => {
 		return res.send(response);
 	});
 });
@@ -88,7 +95,15 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("userDisconnect", (data) => {
-		searchingClients.filter((x) => x.socket.id !== socket.id);
+		searchingClients = searchingClients.filter(
+			(x) => x.socket.id !== socket.id
+		);
+	});
+
+	socket.on("cancelSearch", (data) => {
+		searchingClients = searchingClients.filter(
+			(x) => x.socket.id !== socket.id
+		);
 	});
 });
 
