@@ -1,6 +1,6 @@
 <template>
 	<a-layout-header class="header">
-		<span class="logo-title">ChatApp2</span>
+		<span class="logo-title">ChatApp22</span>
 	</a-layout-header>
 </template>
 
