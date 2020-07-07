@@ -9,7 +9,7 @@ var cors = require("cors");
 var app = express();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
-app.use(cors());
+app.use(express.static('../client/dist'));
 
 setupDatabase("mongodb://localhost:27017", "ChatApp");
 
