@@ -1,22 +1,22 @@
 <template>
-	<a-layout-header class="header">
-		<span class="logo-title">ChatApp22</span>
-	</a-layout-header>
+    <a-layout-header class="header">
+        <span class="logo-title">ChatApp</span>
+    </a-layout-header>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 export default Vue.extend({
-	name: "navbar",
+    name: "navbar"
 });
 </script>
 
 <style scoped>
 .header {
-	background: white;
+    background: white;
 }
 
 .logo-title {
-	font-size: 26px;
+    font-size: 26px;
 }
 </style>
