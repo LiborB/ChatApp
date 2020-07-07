@@ -31,8 +31,8 @@
                             >
                                 <template slot="dataSource">
                                     <a-select-option
-                                        v-for="(topic, index) in matchingTopics"
-                                        :key="index.toString()"
+                                        v-for="topic in matchingTopics"
+                                        :key="topic.topicName"
                                         :title="topic.topicName"
                                     >
                                         <span>{{ topic.topicName }}</span>&nbsp;
