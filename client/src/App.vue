@@ -12,7 +12,7 @@ import Vue from "vue";
 import Navbar from "@/components/Navbar.vue";
 import io from "socket.io-client";
 import Statics from './shared/statics';
-export const socket = io(Statics.baseApiUrl, {transports: ['websocket']});
+export const socket = io(Statics.baseApiUrl);
 
 export default Vue.extend({
     name: "App",
