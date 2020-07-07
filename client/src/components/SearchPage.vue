@@ -209,7 +209,7 @@ export default Vue.extend({
             } else {
                 this.beginSearching();
             }
-            let autocomplete = this.$refs.autocomplete as AutoComplete;
+            const autocomplete = this.$refs.autocomplete as AutoComplete;
             autocomplete.open = false;
         }
     },
