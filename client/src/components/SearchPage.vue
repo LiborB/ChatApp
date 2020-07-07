@@ -22,6 +22,7 @@
                     <a-row class="search-row">
                         <a-col :span="24">
                             <a-auto-complete
+                                ref="autocomplete"
                                 v-model="topic"
                                 style="width:100%"
                                 size="large"
@@ -132,6 +133,7 @@ import { socket } from "../App.vue";
 import Statics from "../shared/statics";
 import TopicService from "../services/topic-service";
 import TopicStatistic from "../models/TopicStatistic";
+import { AutoComplete } from "ant-design-vue";
 
 interface FoundSearch {
     otherUsername: string;
@@ -207,6 +209,8 @@ export default Vue.extend({
             } else {
                 this.beginSearching();
             }
+            let autocomplete = this.$refs.autocomplete as AutoComplete;
+            autocomplete.open = false;
         }
     },
     mounted() {
