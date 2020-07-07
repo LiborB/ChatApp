@@ -12,9 +12,7 @@ var io = require("socket.io")(http);
 
 setupDatabase("mongodb://localhost:27017", "ChatApp");
 
-app.get("/", (req, res) => {
-	return res.send("Received a GET HTTP method");
-});
+
 
 app.get("/gettoptentopics", (req, res) => {
 	getTenPopularTopics().then((response) => {
