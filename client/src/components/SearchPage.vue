@@ -11,8 +11,14 @@
                 <a-col :span="8"></a-col>
             </a-row>
             <a-row>
-                <a-col :span="8"></a-col>
-                <a-col :span="8">
+                <a-col
+                    :md="8"
+                    :xs="{span:4}"
+                ></a-col>
+                <a-col
+                    :xs="{span:16}"
+                    :md="8"
+                >
                     <a-row class="search-row">
                         <a-col :span="24">
                             <a-auto-complete
@@ -29,12 +35,8 @@
                                         :key="index.toString()"
                                         :title="topic.topicName"
                                     >
-                                        <span>{{ topic.topicName }}</span
-                                        >&nbsp;
-                                        <span
-                                            style="float:right; font-weight:bold"
-                                            >{{ topic.count }} searches</span
-                                        >
+                                        <span>{{ topic.topicName }}</span>&nbsp;
+                                        <span style="float:right; font-weight:bold">{{ topic.count }} searches</span>
                                     </a-select-option>
                                 </template>
                                 <a-input>
@@ -56,27 +58,38 @@
                         </a-col>
                     </a-row>
                     <a-row class="loading-row">
-                        <a-col :span="8" :offset="8">
+                        <a-col
+                            :span="8"
+                            :offset="8"
+                        >
                             <div v-if="isSearching">
                                 <a-spin size="large"></a-spin>
-                                <span class="searching-text"
-                                    >Searching for user...</span
-                                >
+                                <span class="searching-text">Searching for user...</span>
                             </div>
                         </a-col>
                     </a-row>
                     <a-row class="username-row">
-                        <a-col :span="12">
+                        <a-col
+                            :md="18"
+                            :xs="24"
+                        >
                             <a-input
                                 v-model="displayName"
                                 placeholder="(Optional) Specify a display name"
-                                ><a-icon slot="prefix" type="user"
-                            /></a-input>
+                            >
+                                <a-icon
+                                    slot="prefix"
+                                    type="user"
+                                />
+                            </a-input>
                         </a-col>
                         <a-col :span="6"></a-col>
                     </a-row>
                 </a-col>
-                <a-col :span="8"></a-col>
+                <a-col
+                    :md="8"
+                    :xs="{span:4}"
+                ></a-col>
             </a-row>
             <a-row class="top-ten-row">
                 <a-col :span="8"></a-col>
